@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Connection test document
+    match /test/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    function isValidSolicitacao(data) {
+      return data.keys().hasAll(['clientName', 'phone', 'createdAt'])
+        && data.clientName is string && data.clientName.size() >= 2 && data.clientName.size() <= 150
+        && data.phone is string && data.phone.size() >= 6 && data.phone.size() <= 30
+        && data.createdAt is string;
+    }
+
+    match /assessoria_contabil/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /acessoria_contabil/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /acessoriacontabil/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /assessoriacontabil/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /acessoria-contabil/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /assessoria-contabil/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /AcessoriaContabil/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /AssessoriaContabil/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /solicitacoes_contabeis/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /leads/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /contatos/{id} {
+      allow read: if true;
+      allow create: if isValidSolicitacao(request.resource.data);
+      allow update, delete: if false;
+    }
+  }
+}

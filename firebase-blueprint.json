@@ -1,0 +1,89 @@
+{
+  "entities": {
+    "solicitacaoContabil": {
+      "title": "Solicitação Contábil",
+      "description": "Registro de solicitação de assessoria contábil, fiscal e administrativa",
+      "type": "object",
+      "properties": {
+        "clientName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100,
+          "description": "Nome do solicitante ou responsável"
+        },
+        "companyName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Razão social ou nome fantasia da empresa"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "E-mail de contato corporativo ou pessoal"
+        },
+        "phone": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 20,
+          "description": "Telefone ou WhatsApp para retorno"
+        },
+        "serviceType": {
+          "type": "string",
+          "enum": ["contabil", "fiscal", "financeiro", "rh", "abertura_empresa", "completo"],
+          "description": "Modalidade de assessoria contábil requerida"
+        },
+        "regimeTributario": {
+          "type": "string",
+          "enum": ["simples_nacional", "lucro_presumido", "lucro_real", "mei", "ainda_nao_sei"],
+          "description": "Enquadramento tributário da empresa"
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Detalhes sobre a necessidade contábil ou fiscal"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pendente", "em_analise", "atendido"],
+          "description": "Status de atendimento da solicitação"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data e hora de envio em formato ISO"
+        }
+      },
+      "required": ["clientName", "phone", "serviceType", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/assessoria_contabil/{id}": {
+      "schema": "solicitacaoContabil",
+      "description": "Coleção principal de assessoria contábil no Firebase"
+    },
+    "/acessoria_contabil/{id}": {
+      "schema": "solicitacaoContabil",
+      "description": "Coleção alternativa de assessoria contábil"
+    },
+    "/acessoriacontabil/{id}": {
+      "schema": "solicitacaoContabil",
+      "description": "Coleção de assessoria contábil sem separadores"
+    },
+    "/assessoriacontabil/{id}": {
+      "schema": "solicitacaoContabil",
+      "description": "Coleção de assessoria contábil sem separadores"
+    },
+    "/acessoria-contabil/{id}": {
+      "schema": "solicitacaoContabil",
+      "description": "Coleção com hífen de assessoria contábil"
+    },
+    "/assessoria-contabil/{id}": {
+      "schema": "solicitacaoContabil",
+      "description": "Coleção com hífen de assessoria contábil"
+    },
+    "/solicitacoes_contabeis/{solicitacaoId}": {
+      "schema": "solicitacaoContabil",
+      "description": "Coleção com os registros de solicitações de assessoria contábil e consultoria"
+    }
+  }
+}
